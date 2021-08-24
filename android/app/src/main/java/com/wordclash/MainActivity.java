@@ -1,4 +1,6 @@
+import android.os.Bundle;
 package com.wordclash;
+
 
 import com.facebook.react.ReactActivity;
 
@@ -12,4 +14,9 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "wordclash";
   }
+
+  @Override
+   protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(null);
+}
 }
