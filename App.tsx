@@ -4,7 +4,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeStack from './src/screens/chat';
 import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
-import {StyleSheet} from 'react-native';
 
 const RootStack = createNativeStackNavigator();
 export default function App() {
@@ -14,14 +13,12 @@ export default function App() {
     <NavigationContainer>
       <SafeAreaView
         style={[
-          styles.container,
-          {backgroundColor: colorScheme === 'light' ? '#fff' : '#212529'},
+          {
+            backgroundColor: colorScheme === 'light' ? '#fff' : '#212529',
+            flex: 1,
+          },
         ]}>
-        <StatusBar
-          animated={true}
-          backgroundColor="#61dafb"
-          barStyle={barStyle}
-        />
+        <StatusBar barStyle={barStyle} />
         <RootStack.Navigator>
           <RootStack.Screen
             name="home"
@@ -33,9 +30,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

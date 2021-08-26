@@ -1,90 +1,158 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
-import styled from 'styled-components/native';
+import {StyleSheet, View, Image, Pressable, FlatList} from 'react-native';
+import {ChatListItem} from '../../components/elements/ChatListItem';
+import Text from '../../components/elements/Text';
 import Bell from '../../components/icons/Bell';
+import ChatPlus from '../../components/icons/ChatPlus';
 import Coins from '../../components/icons/Coins';
 
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb8ba',
+    title: 'nigeria words clash',
+    top: 'mamba',
+    words: '120k',
+    active: true,
+  },
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'uche and friends',
+    top: 'uche',
+    words: '120k',
+    active: true,
+  },
+
+  {
+    id: 'bd7acb-c1b1-46c2-aed5-3ad53bb28ba',
+    title: 'the global chat room',
+    top: 'noel',
+    words: '130k',
+    active: true,
+  },
+];
 export default function ChatList() {
   return (
-    <Container>
-      <Header>
-        <UserInfo>
-          <UserAvatar />
-          <UserMeta>
-            <Text>asenwibor</Text>
-            <UserPoints>
-              <Coins />
-              <Text>800,000</Text>
-            </UserPoints>
-          </UserMeta>
-        </UserInfo>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.headerLeft}>
+          <Image
+            style={styles.avatar}
+            source={{uri: 'https://eu.ui-avatars.com/api/?background=random'}}
+          />
 
-        <TouchableOpacity onPress={() => console.log('toggle notification')}>
+          <View style={styles.userinfo}>
+            <Text>uchenoel</Text>
+            <View style={styles.userPoints}>
+              <Coins style={styles.points} />
+              <Text>89,000</Text>
+            </View>
+          </View>
+        </View>
+
+        <Pressable onPress={() => console.warn('pressed')}>
           <Bell />
-        </TouchableOpacity>
-      </Header>
-
-      <TopTab>
-        <Tab />
-        <Tab />
-      </TopTab>
-
-      <Rooms>
-        <Text>rooms</Text>
-      </Rooms>
-    </Container>
+        </Pressable>
+      </View>
+      <View style={styles.tobTabs}>
+        <Pressable style={styles.tabBtn}>
+          <Text>Leaderboard</Text>
+        </Pressable>
+        <Pressable style={styles.tabBtn}>
+          <Text>Tournaments</Text>
+        </Pressable>
+      </View>
+      <View style={styles.chatList}>
+        <View style={styles.chatListHeader}>
+          <Text>Chat Rooms</Text>
+          <ChatPlus />
+        </View>
+        <FlatList
+          keyExtractor={item => item.id}
+          ItemSeparatorComponent={Line}
+          data={DATA}
+          renderItem={({item}) => (
+            <ChatListItem item={item} onPress={() => console.warn('pressed')} />
+          )}
+        />
+      </View>
+    </View>
   );
 }
 
-const Container = styled.View`
-  flex: 1;
-  background-color: #212529;
-`;
+const Line = () => {
+  return <View style={styles.line} />;
+};
 
-const Header = styled.View`
-  padding: 16px;
-  height: 100px;
-  flex-direction: row;
-  border: 1px solid red;
-  justify-content: space-between;
-`;
+const styles = StyleSheet.create({
+  line: {
+    backgroundColor: '#495057',
+    width: '90%',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    padding: 1,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#212529',
+  },
 
-const UserInfo = styled.View`
-  width: 40%;
-  flex-direction: row;
-`;
+  header: {
+    backgroundColor: '#212529',
+    padding: 16,
+    width: '100%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 
-const UserAvatar = styled.View`
-  width: 50px;
-  height: 50px;
-  margin-right: 12px;
-  border: 1px solid red;
-  border-radius: 25px;
-`;
+  avatar: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    marginRight: 8,
+  },
+  headerLeft: {
+    flexDirection: 'row',
+  },
+  userinfo: {},
 
-const UserMeta = styled.View``;
+  userPoints: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  points: {
+    marginRight: 8,
+  },
 
-const UserPoints = styled.View`
-  flex-direction: row;
-`;
+  tobTabs: {
+    flexDirection: 'row',
+    marginTop: 18,
+    justifyContent: 'center',
+  },
+  tabBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 154,
+    height: 47,
+    backgroundColor: '#5A31F4',
+    borderRadius: 8,
+    margin: 8,
+  },
+  chatList: {
+    flex: 1,
+    marginTop: 8,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
 
-const TopTab = styled.View`
-  flex-direction: row;
-  justify-content: space-around;
-  padding: 16px;
-`;
-
-const Tab = styled.View`
-  width: 160px;
-  height: 48px;
-  border-radius: 8px;
-  background-color: purple;
-`;
-
-const Rooms = styled.View`
-  background-color: #343a40;
-  width: 100%;
-  height: auto;
-  border-radius: 24px;
-  height: 100%;
-`;
+    backgroundColor: '#343A40',
+  },
+  chatListHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomColor: '#495057',
+    borderBottomWidth: 1,
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    height: 45,
+  },
+});
