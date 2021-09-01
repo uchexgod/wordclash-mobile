@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, View, Image, Pressable, FlatList} from 'react-native';
 import {ChatListItem} from '../../components/elements/ChatListItem';
@@ -5,6 +6,7 @@ import Text from '../../components/elements/Text';
 import Bell from '../../components/icons/Bell';
 import ChatPlus from '../../components/icons/ChatPlus';
 import Coins from '../../components/icons/Coins';
+import {ChatListProps} from '../../types';
 
 const DATA = [
   {
@@ -31,6 +33,7 @@ const DATA = [
   },
 ];
 export default function ChatList() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -71,7 +74,10 @@ export default function ChatList() {
           ItemSeparatorComponent={Line}
           data={DATA}
           renderItem={({item}) => (
-            <ChatListItem item={item} onPress={() => console.warn('pressed')} />
+            <ChatListItem
+              item={item}
+              onPress={() => navigation.navigate('chatScreen')}
+            />
           )}
         />
       </View>

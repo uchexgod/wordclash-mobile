@@ -43,6 +43,7 @@
 		8C25B0020E91D01A560CE0BE /* Pods-wordclash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wordclash.release.xcconfig"; path = "Target Support Files/Pods-wordclash/Pods-wordclash.release.xcconfig"; sourceTree = "<group>"; };
 		9EBC8783D2B7BD2623B2EE7D /* Pods-wordclash-wordclashTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wordclash-wordclashTests.release.xcconfig"; path = "Target Support Files/Pods-wordclash-wordclashTests/Pods-wordclash-wordclashTests.release.xcconfig"; sourceTree = "<group>"; };
 		A3243C53945A988612060AE3 /* Pods-wordclash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wordclash.debug.xcconfig"; path = "Target Support Files/Pods-wordclash/Pods-wordclash.debug.xcconfig"; sourceTree = "<group>"; };
+		DFA3C6D826DF3D1E005A6C48 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -86,6 +87,7 @@
 		13B07FAE1A68108700A75B9A /* wordclash */ = {
 			isa = PBXGroup;
 			children = (
+				DFA3C6D726DF3CDD005A6C48 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -104,7 +106,6 @@
 				209198C08DB15773D4CFE653 /* Pods-wordclash-wordclashTests.debug.xcconfig */,
 				9EBC8783D2B7BD2623B2EE7D /* Pods-wordclash-wordclashTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -147,6 +148,14 @@
 				00E356EE1AD99517003FC87E /* wordclashTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DFA3C6D726DF3CDD005A6C48 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DFA3C6D826DF3D1E005A6C48 /* Ionicons.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

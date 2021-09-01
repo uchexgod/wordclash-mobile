@@ -3,7 +3,13 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeStack from './src/screens/chat';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  useColorScheme,
+} from 'react-native';
 
 const RootStack = createNativeStackNavigator();
 export default function App() {
@@ -11,22 +17,26 @@ export default function App() {
   const barStyle = colorScheme === 'light' ? 'dark-content' : 'light-content';
   return (
     <NavigationContainer>
-      <SafeAreaView
-        style={[
-          {
-            backgroundColor: colorScheme === 'light' ? '#fff' : '#212529',
-            flex: 1,
-          },
-        ]}>
-        <StatusBar barStyle={barStyle} />
-        <RootStack.Navigator>
-          <RootStack.Screen
-            name="home"
-            component={HomeStack}
-            options={{headerShown: false}}
-          />
-        </RootStack.Navigator>
-      </SafeAreaView>
+      <KeyboardAvoidingView
+        style={{flex: 1}}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <SafeAreaView
+          style={[
+            {
+              backgroundColor: colorScheme === 'light' ? '#fff' : '#212529',
+              flex: 1,
+            },
+          ]}>
+          <StatusBar barStyle={barStyle} />
+          <RootStack.Navigator>
+            <RootStack.Screen
+              name="home"
+              component={HomeStack}
+              options={{headerShown: false}}
+            />
+          </RootStack.Navigator>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     </NavigationContainer>
   );
 }
