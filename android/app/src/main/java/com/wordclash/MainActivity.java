@@ -1,5 +1,7 @@
-import android.os.Bundle;
 package com.wordclash;
+
+import android.os.Bundle;
+
 
 
 import com.facebook.react.ReactActivity;
