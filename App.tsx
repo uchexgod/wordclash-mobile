@@ -3,6 +3,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeStack from './src/screens/chat';
+import AuthStack from './src/screens/auth';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -28,10 +29,15 @@ export default function App() {
             },
           ]}>
           <StatusBar barStyle={barStyle} />
-          <RootStack.Navigator>
+          <RootStack.Navigator initialRouteName="login">
             <RootStack.Screen
               name="home"
               component={HomeStack}
+              options={{headerShown: false}}
+            />
+            <RootStack.Screen
+              name="login"
+              component={AuthStack}
               options={{headerShown: false}}
             />
           </RootStack.Navigator>

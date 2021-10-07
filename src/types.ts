@@ -9,3 +9,7 @@ export type ChatListProps = NativeStackScreenProps<
   RootStackParamList,
   'chatList'
 >;
+
+export type AuthStackParamList = {
+  Login: undefined;
+};
