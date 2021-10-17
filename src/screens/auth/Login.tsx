@@ -1,27 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Pressable, Text} from 'react-native';
-import Svg, {Text as Txt} from 'react-native-svg';
 import AppleIcon from '../../components/icons/Apple';
 import GoogleIcon from '../../components/icons/Google';
 
 import {theme} from '../../theme';
 
 function Login() {
+  // const [boxShowing, showBox] = useState<boolean>(false);
+
   return (
     <View style={styles.container}>
-      <Svg height="60" width="300">
-        <Txt
-          fill="none"
-          stroke="#7952B3"
-          fontSize="58"
-          strokeWidth="2"
-          fontFamily="Inter-ExtraBold"
-          x="150"
-          y="50"
-          textAnchor="middle">
-          wordclash
-        </Txt>
-      </Svg>
+      <View style={styles.bitTcontain}>
+        <Text style={styles.bigT}>word</Text>
+        <Text style={styles.bigT}>clash</Text>
+      </View>
 
       <View style={styles.buttonBox}>
         <Pressable style={styles.button}>
@@ -29,7 +21,7 @@ function Login() {
         </Pressable>
       </View>
 
-      <View style={styles.socialButtons}>
+      <View style={[styles.socialButtons, {display: 'none'}]}>
         <Pressable style={styles.socButton}>
           <GoogleIcon />
           <Text style={styles.btnTxt}>Log In with Google</Text>
@@ -68,7 +60,6 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#9A6FDA',
-
     padding: 10,
     height: 70,
     minWidth: 330,
@@ -76,7 +67,32 @@ const styles = StyleSheet.create({
     marginTop: 94,
     justifyContent: 'center',
     margin: 5,
+    borderColor: '#e9c46a',
+    borderWidth: 2,
     alignItems: 'center',
+    shadowColor: '#e9c46a',
+    shadowRadius: 0.5,
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 5,
+      height: 8,
+    },
+  },
+
+  bitTcontain: {},
+  bigT: {
+    fontSize: 100,
+    fontWeight: '900',
+    lineHeight: -13,
+    fontFamily: 'Inter-ExtraBold',
+    color: '#fff',
+    textShadowColor: '#9A6FDA',
+    textShadowOffset: {
+      width: -5,
+      height: 5,
+    },
+    textShadowRadius: 5,
+    margin: 15,
   },
 
   socialButtons: {
