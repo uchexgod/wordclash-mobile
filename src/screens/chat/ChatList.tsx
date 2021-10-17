@@ -1,12 +1,10 @@
-import {useNavigation} from '@react-navigation/native';
+import Bell from 'components/icons/Bell';
 import React from 'react';
 import {StyleSheet, View, Image, Pressable, FlatList} from 'react-native';
 import {ChatListItem} from '../../components/elements/ChatListItem';
 import Text from '../../components/elements/Text';
-import Bell from '../../components/icons/Bell';
-import ChatPlus from '../../components/icons/ChatPlus';
+
 import Coins from '../../components/icons/Coins';
-import {ChatListProps} from '../../types';
 
 const DATA = [
   {
@@ -33,7 +31,6 @@ const DATA = [
   },
 ];
 export default function ChatList() {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -56,19 +53,8 @@ export default function ChatList() {
           <Bell />
         </Pressable>
       </View>
-      <View style={styles.tobTabs}>
-        <Pressable style={styles.tabBtn}>
-          <Text>Leaderboard</Text>
-        </Pressable>
-        <Pressable style={styles.tabBtn}>
-          <Text>Tournaments</Text>
-        </Pressable>
-      </View>
-      <View style={styles.chatList}>
-        <View style={styles.chatListHeader}>
-          <Text>Chat Rooms</Text>
-          <ChatPlus />
-        </View>
+
+      {/* <View style={styles.chatList}>
         <FlatList
           keyExtractor={item => item.id}
           ItemSeparatorComponent={Line}
@@ -76,11 +62,11 @@ export default function ChatList() {
           renderItem={({item}) => (
             <ChatListItem
               item={item}
-              onPress={() => navigation.navigate('chatScreen')}
+              onPress={() => console.log('navigating..')}
             />
           )}
         />
-      </View>
+      </View> */}
     </View>
   );
 }

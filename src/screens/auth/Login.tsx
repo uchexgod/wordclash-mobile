@@ -1,12 +1,49 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Pressable, Text} from 'react-native';
+import React from 'react';
+import {
+  View,
+  StyleSheet,
+  Pressable,
+  Text,
+  useWindowDimensions,
+} from 'react-native';
+import {
+  State,
+  TapGestureHandler,
+  TapGestureHandlerStateChangeEvent,
+} from 'react-native-gesture-handler';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+
 import AppleIcon from '../../components/icons/Apple';
 import GoogleIcon from '../../components/icons/Google';
 
 import {theme} from '../../theme';
 
 function Login() {
-  // const [boxShowing, showBox] = useState<boolean>(false);
+  const {height, width} = useWindowDimensions();
+
+  const boxTranslate = useSharedValue(1000);
+
+  const showBox = () => {
+    boxTranslate.value = 0;
+  };
+
+  const animate = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {translateY: withTiming(boxTranslate.value, {duration: 500})},
+      ],
+    };
+  });
+
+  const eventHandler = (event: TapGestureHandlerStateChangeEvent) => {
+    if (event.nativeEvent.state === State.ACTIVE) {
+      boxTranslate.value = 1000;
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -16,21 +53,26 @@ function Login() {
       </View>
 
       <View style={styles.buttonBox}>
-        <Pressable style={styles.button}>
+        <Pressable style={styles.button} onPress={() => showBox()}>
           <Text style={styles.txt}>PLAY</Text>
         </Pressable>
       </View>
 
-      <View style={[styles.socialButtons, {display: 'none'}]}>
-        <Pressable style={styles.socButton}>
-          <GoogleIcon />
-          <Text style={styles.btnTxt}>Log In with Google</Text>
-        </Pressable>
-        <Pressable style={styles.socButton}>
-          <AppleIcon />
-          <Text style={styles.btnTxt}>Log In with Apple</Text>
-        </Pressable>
-      </View>
+      <Animated.View style={[styles.modal, animate, {width, height}]}>
+        <TapGestureHandler onHandlerStateChange={eventHandler}>
+          <View style={styles.touchCloser}></View>
+        </TapGestureHandler>
+        <View style={[styles.socialButtons]}>
+          <Pressable style={styles.socButton}>
+            <GoogleIcon />
+            <Text style={styles.btnTxt}>Log In with Google</Text>
+          </Pressable>
+          <Pressable style={styles.socButton}>
+            <AppleIcon />
+            <Text style={styles.btnTxt}>Log In with Apple</Text>
+          </Pressable>
+        </View>
+      </Animated.View>
     </View>
   );
 }
@@ -57,6 +99,15 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  modal: {
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    flexDirection: 'column',
+  },
+  touchCloser: {
+    flex: 1,
   },
   button: {
     backgroundColor: '#9A6FDA',
@@ -96,13 +147,12 @@ const styles = StyleSheet.create({
   },
 
   socialButtons: {
-    height: 370,
+    height: 450,
     backgroundColor: theme.colors.lightGrey,
     width: '100%',
     position: 'absolute',
     bottom: -10,
     alignItems: 'center',
-
     borderRadius: 12,
   },
   socButton: {

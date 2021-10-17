@@ -11,38 +11,41 @@ import {
   StatusBar,
   useColorScheme,
 } from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const RootStack = createNativeStackNavigator();
 export default function App() {
   const colorScheme = useColorScheme();
   const barStyle = colorScheme === 'light' ? 'dark-content' : 'light-content';
   return (
-    <NavigationContainer>
-      <KeyboardAvoidingView
-        style={{flex: 1}}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <SafeAreaView
-          style={[
-            {
-              backgroundColor: colorScheme === 'light' ? '#fff' : '#212529',
-              flex: 1,
-            },
-          ]}>
-          <StatusBar barStyle={barStyle} />
-          <RootStack.Navigator initialRouteName="login">
-            <RootStack.Screen
-              name="home"
-              component={HomeStack}
-              options={{headerShown: false}}
-            />
-            <RootStack.Screen
-              name="login"
-              component={AuthStack}
-              options={{headerShown: false}}
-            />
-          </RootStack.Navigator>
-        </SafeAreaView>
-      </KeyboardAvoidingView>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <KeyboardAvoidingView
+          style={{flex: 1}}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <SafeAreaView
+            style={[
+              {
+                backgroundColor: colorScheme === 'light' ? '#fff' : '#212529',
+                flex: 1,
+              },
+            ]}>
+            <StatusBar barStyle={barStyle} />
+            <RootStack.Navigator initialRouteName="login">
+              <RootStack.Screen
+                name="home"
+                component={HomeStack}
+                options={{headerShown: false}}
+              />
+              <RootStack.Screen
+                name="login"
+                component={AuthStack}
+                options={{headerShown: false}}
+              />
+            </RootStack.Navigator>
+          </SafeAreaView>
+        </KeyboardAvoidingView>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
