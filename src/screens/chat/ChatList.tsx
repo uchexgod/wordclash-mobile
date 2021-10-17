@@ -1,36 +1,36 @@
 import Bell from 'components/icons/Bell';
 import React from 'react';
-import {StyleSheet, View, Image, Pressable, FlatList} from 'react-native';
-import {ChatListItem} from '../../components/elements/ChatListItem';
+import {StyleSheet, View, Image, Pressable} from 'react-native';
+import {HomeNavProps} from 'types';
 import Text from '../../components/elements/Text';
 
 import Coins from '../../components/icons/Coins';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb8ba',
-    title: 'nigeria words clash',
-    top: 'mamba',
-    words: '120k',
-    active: true,
-  },
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'uche and friends',
-    top: 'uche',
-    words: '120k',
-    active: true,
-  },
+// const DATA = [
+//   {
+//     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb8ba',
+//     title: 'nigeria words clash',
+//     top: 'mamba',
+//     words: '120k',
+//     active: true,
+//   },
+//   {
+//     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+//     title: 'uche and friends',
+//     top: 'uche',
+//     words: '120k',
+//     active: true,
+//   },
 
-  {
-    id: 'bd7acb-c1b1-46c2-aed5-3ad53bb28ba',
-    title: 'the global chat room',
-    top: 'noel',
-    words: '130k',
-    active: true,
-  },
-];
-export default function ChatList() {
+//   {
+//     id: 'bd7acb-c1b1-46c2-aed5-3ad53bb28ba',
+//     title: 'the global chat room',
+//     top: 'noel',
+//     words: '130k',
+//     active: true,
+//   },
+// ];
+export default function ChatList({navigation}: HomeNavProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -70,10 +70,6 @@ export default function ChatList() {
     </View>
   );
 }
-
-const Line = () => {
-  return <View style={styles.line} />;
-};
 
 const styles = StyleSheet.create({
   line: {

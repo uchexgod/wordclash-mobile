@@ -1,15 +1,23 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {StackScreenProps} from '@react-navigation/stack';
 
 export type RootStackParamList = {
-  chatList: undefined;
-  chatScreen: undefined | {roomId: string};
+  Auth: undefined;
+  Home: undefined;
 };
 
-export type ChatListProps = NativeStackScreenProps<
-  RootStackParamList,
-  'chatList'
->;
+export type LoginNavProps = StackScreenProps<RootStackParamList, 'Auth'>;
+export type HomeNavProps = StackScreenProps<RootStackParamList, 'Home'>;
+
+// export type ChatListProps = NativeStackScreenProps<
+//   RootStackParamList,
+//   'chatList'
+// >;
 
 export type AuthStackParamList = {
   Login: undefined;
+};
+
+export type AppStackParamList = {
+  RoomList: undefined;
+  ChatRoom: undefined;
 };

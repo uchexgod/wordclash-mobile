@@ -16,13 +16,14 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import {LoginNavProps} from '../../types';
 
 import AppleIcon from '../../components/icons/Apple';
 import GoogleIcon from '../../components/icons/Google';
 
 import {theme} from '../../theme';
 
-function Login() {
+function Login({navigation}: LoginNavProps) {
   const {height, width} = useWindowDimensions();
 
   const boxTranslate = useSharedValue(1000);
@@ -63,11 +64,15 @@ function Login() {
           <View style={styles.touchCloser}></View>
         </TapGestureHandler>
         <View style={[styles.socialButtons]}>
-          <Pressable style={styles.socButton}>
+          <Pressable
+            style={styles.socButton}
+            onPress={() => navigation.navigate('Home')}>
             <GoogleIcon />
             <Text style={styles.btnTxt}>Log In with Google</Text>
           </Pressable>
-          <Pressable style={styles.socButton}>
+          <Pressable
+            style={styles.socButton}
+            onPress={() => navigation.navigate('Home')}>
             <AppleIcon />
             <Text style={styles.btnTxt}>Log In with Apple</Text>
           </Pressable>

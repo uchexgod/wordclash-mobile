@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import HomeStack from './src/screens/chat';
 import AuthStack from './src/screens/auth';
 import {
@@ -12,8 +12,9 @@ import {
   useColorScheme,
 } from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {RootStackParamList} from 'types';
 
-const RootStack = createNativeStackNavigator();
+const RootStack = createStackNavigator<RootStackParamList>();
 export default function App() {
   const colorScheme = useColorScheme();
   const barStyle = colorScheme === 'light' ? 'dark-content' : 'light-content';
@@ -31,16 +32,16 @@ export default function App() {
               },
             ]}>
             <StatusBar barStyle={barStyle} />
-            <RootStack.Navigator initialRouteName="login">
+            <RootStack.Navigator initialRouteName="Auth">
               <RootStack.Screen
-                name="home"
+                name="Home"
                 component={HomeStack}
-                options={{headerShown: false}}
+                options={{headerShown: false, gestureEnabled: false}}
               />
               <RootStack.Screen
-                name="login"
+                name="Auth"
                 component={AuthStack}
-                options={{headerShown: false}}
+                options={{headerShown: false, gestureEnabled: false}}
               />
             </RootStack.Navigator>
           </SafeAreaView>

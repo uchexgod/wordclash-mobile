@@ -1,16 +1,16 @@
 import * as React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import ChatList from './ChatList';
 import ChatScreen from './ChatScreen';
-import {RootStackParamList} from '../../types';
+import {AppStackParamList} from '../../types';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator<AppStackParamList>();
 
 export default function HomeStack() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="chatList" component={ChatList} />
-      <Stack.Screen name="chatScreen" component={ChatScreen} />
+      <Stack.Screen name="RoomList" component={ChatList} />
+      <Stack.Screen name="ChatRoom" component={ChatScreen} />
     </Stack.Navigator>
   );
 }
