@@ -1,146 +1,123 @@
-import Bell from 'components/icons/Bell';
+import RequestIcon from 'components/icons/RequestIcon';
 import React from 'react';
-import {StyleSheet, View, Image, Pressable} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {HomeNavProps} from 'types';
-import Text from '../../components/elements/Text';
 
-import Coins from '../../components/icons/Coins';
-
-// const DATA = [
-//   {
-//     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb8ba',
-//     title: 'nigeria words clash',
-//     top: 'mamba',
-//     words: '120k',
-//     active: true,
-//   },
-//   {
-//     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-//     title: 'uche and friends',
-//     top: 'uche',
-//     words: '120k',
-//     active: true,
-//   },
-
-//   {
-//     id: 'bd7acb-c1b1-46c2-aed5-3ad53bb28ba',
-//     title: 'the global chat room',
-//     top: 'noel',
-//     words: '130k',
-//     active: true,
-//   },
-// ];
-export default function ChatList({navigation}: HomeNavProps) {
+export default function ChatList({}: HomeNavProps) {
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <Image
-            style={styles.avatar}
-            source={{uri: 'https://eu.ui-avatars.com/api/?background=random'}}
-          />
+      <View style={styles.topDash}>
+        <View>
+          <Text style={styles.username}>uchenoel</Text>
 
-          <View style={styles.userinfo}>
-            <Text>uchenoel</Text>
-            <View style={styles.userPoints}>
-              <Coins style={styles.points} />
-              <Text>89,000</Text>
-            </View>
-          </View>
+          <Text style={styles.credits}>200,000</Text>
         </View>
 
-        <Pressable onPress={() => console.warn('pressed')}>
-          <Bell />
+        <Pressable
+          style={[
+            styles.newBtn,
+            {
+              shadowColor: '#7952B3',
+              shadowOpacity: 1,
+              shadowOffset: {
+                width: 0,
+                height: 1,
+              },
+              shadowRadius: 13,
+            },
+          ]}>
+          <Text style={styles.btnText}>New</Text>
         </Pressable>
-      </View>
 
-      {/* <View style={styles.chatList}>
-        <FlatList
-          keyExtractor={item => item.id}
-          ItemSeparatorComponent={Line}
-          data={DATA}
-          renderItem={({item}) => (
-            <ChatListItem
-              item={item}
-              onPress={() => console.log('navigating..')}
-            />
-          )}
-        />
-      </View> */}
+        <View>
+          <RequestIcon />
+        </View>
+      </View>
+      <View style={styles.chatList}>
+        <View style={styles.chatListItem}>
+          <Text style={styles.roomId}>33-CRYPSY-ODYSSY</Text>
+          <View style={styles.itemFoot}>
+            <Icon name="trophy-outline" size={16} color="#FBBC05" />
+            <Text style={styles.footText}>uchenoel</Text>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  line: {
-    backgroundColor: '#495057',
-    width: '90%',
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    padding: 1,
-  },
   container: {
     flex: 1,
     backgroundColor: '#212529',
   },
-
-  header: {
-    backgroundColor: '#212529',
-    padding: 16,
-    width: '100%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  username: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 16,
+    color: '#fff',
   },
-
-  avatar: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    marginRight: 8,
+  credits: {
+    fontFamily: 'Inter-ExtraBold',
+    fontSize: 16,
+    color: '#FBBC05',
   },
-  headerLeft: {
-    flexDirection: 'row',
-  },
-  userinfo: {},
-
-  userPoints: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  points: {
-    marginRight: 8,
-  },
-
-  tobTabs: {
-    flexDirection: 'row',
-    marginTop: 18,
-    justifyContent: 'center',
-  },
-  tabBtn: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 154,
-    height: 47,
-    backgroundColor: '#5A31F4',
+  newBtn: {
+    backgroundColor: '#141618',
+    borderColor: '#FBBC05',
+    borderWidth: 1,
     borderRadius: 8,
-    margin: 8,
+    paddingHorizontal: 32,
+    paddingVertical: 10,
   },
-  chatList: {
-    flex: 1,
-    marginTop: 8,
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
-
-    backgroundColor: '#343A40',
+  icon: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  chatListHeader: {
+  btnText: {
+    color: '#fff',
+    fontFamily: 'Inter-SemiBold',
+  },
+  topDash: {
+    borderBottomColor: '#33373B',
+    borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomColor: '#495057',
-    borderBottomWidth: 1,
     alignItems: 'center',
-    paddingHorizontal: 16,
-    height: 45,
+    padding: 24,
+  },
+
+  chatList: {
+    padding: 24,
+  },
+  roomId: {
+    color: '#fff',
+    fontFamily: 'Inter-SemiBold',
+  },
+  itemFoot: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  footText: {
+    marginLeft: 8,
+    color: '#fff',
+  },
+
+  chatListItem: {
+    padding: 8,
+    borderColor: '#9A6FDA',
+    borderRadius: 10,
+    height: 64,
+    borderWidth: 2,
+    backgroundColor: '#33373B',
+    shadowColor: '#7952B3',
+    shadowOpacity: 1,
+    shadowRadius: 4,
+    justifyContent: 'space-between',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    marginBottom: 16,
   },
 });
