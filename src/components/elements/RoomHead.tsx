@@ -1,11 +1,13 @@
+import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function RoomHead() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Pressable>
+      <Pressable onPress={() => navigation.goBack()}>
         <Icon name="chevron-back-outline" size={32} color="#fff" />
       </Pressable>
 
