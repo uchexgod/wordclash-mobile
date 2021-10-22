@@ -6,7 +6,8 @@ export type RootStackParamList = {
 };
 
 export type LoginNavProps = StackScreenProps<RootStackParamList, 'Auth'>;
-export type HomeNavProps = StackScreenProps<RootStackParamList, 'Home'>;
+
+export type HomeNavProps = StackScreenProps<AppStackParamList, 'RoomList'>;
 
 // export type ChatListProps = NativeStackScreenProps<
 //   RootStackParamList,

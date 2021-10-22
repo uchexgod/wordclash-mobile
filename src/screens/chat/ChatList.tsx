@@ -4,7 +4,7 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {HomeNavProps} from 'types';
 
-export default function ChatList({}: HomeNavProps) {
+export default function ChatList({navigation}: HomeNavProps) {
   return (
     <View style={styles.container}>
       <View style={styles.topDash}>
@@ -35,13 +35,15 @@ export default function ChatList({}: HomeNavProps) {
         </View>
       </View>
       <View style={styles.chatList}>
-        <View style={styles.chatListItem}>
+        <Pressable
+          style={styles.chatListItem}
+          onPress={() => navigation.navigate('ChatRoom')}>
           <Text style={styles.roomId}>33-CRYPSY-ODYSSY</Text>
           <View style={styles.itemFoot}>
             <Icon name="trophy-outline" size={16} color="#FBBC05" />
             <Text style={styles.footText}>uchenoel</Text>
           </View>
-        </View>
+        </Pressable>
       </View>
     </View>
   );
