@@ -1,10 +1,52 @@
-import RequestIcon from 'components/icons/RequestIcon';
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Dimensions,
+} from 'react-native';
+
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {HomeNavProps} from 'types';
 
+const {width, height} = Dimensions.get('window');
+
 export default function ChatList({navigation}: HomeNavProps) {
+  const boxTranslate = useSharedValue(0);
+  const modalTranslate = useSharedValue(height - 100);
+
+  const modalX = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {translateY: withSpring(modalTranslate.value, {damping: 50})},
+      ],
+    };
+  });
+
+  const switchTab = (tab: string) => {
+    if (tab === 'create') {
+      boxTranslate.value = -width;
+    } else {
+      boxTranslate.value = 0;
+    }
+  };
+
+  const animate = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {translateX: withTiming(boxTranslate.value, {duration: 500})},
+      ],
+    };
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.topDash}>
@@ -15,6 +57,7 @@ export default function ChatList({navigation}: HomeNavProps) {
         </View>
 
         <Pressable
+          onPress={() => (modalTranslate.value = 0)}
           style={[
             styles.newBtn,
             {
@@ -31,7 +74,7 @@ export default function ChatList({navigation}: HomeNavProps) {
         </Pressable>
 
         <View>
-          <RequestIcon />
+          <Icon name="podium" size={24} color="#FBBC05" />
         </View>
       </View>
       <View style={styles.chatList}>
@@ -45,6 +88,66 @@ export default function ChatList({navigation}: HomeNavProps) {
           </View>
         </Pressable>
       </View>
+
+      <Animated.View style={[styles.createModal, modalX]}>
+        <View style={styles.mHead}>
+          <View style={styles.hActions}>
+            <Pressable onPress={() => switchTab('search')}>
+              <Icon name="search" size={32} color="#fff" />
+            </Pressable>
+            <Pressable onPress={() => switchTab('create')}>
+              <Icon name="add-circle" size={32} color="#1f1f20" />
+            </Pressable>
+          </View>
+
+          <Pressable onPress={() => (modalTranslate.value = height - 100)}>
+            <Icon name="close-circle" size={24} color="#fff" />
+          </Pressable>
+        </View>
+
+        <Animated.View style={[styles.mBody, animate]}>
+          <View style={[styles.joinG]}>
+            <View>
+              <TextInput
+                editable={false}
+                value="33-CRYIO-ODYSSY"
+                style={styles.tInput}
+              />
+            </View>
+
+            <Pressable style={styles.cbtn}>
+              <Text style={styles.cbtnText}>CREATE GAME</Text>
+            </Pressable>
+          </View>
+
+          <View style={[styles.createG]}>
+            <View>
+              <Pressable style={styles.copyTxt}>
+                <Icon name="copy" size={24} color="#bebcbcba" />
+              </Pressable>
+
+              <TextInput
+                editable={false}
+                value="33-CRYIO-ODYSSY"
+                style={styles.tInput}
+              />
+            </View>
+
+            <View style={styles.options}>
+              <Pressable style={styles.optBtn}>
+                <Text style={styles.optText}>words</Text>
+              </Pressable>
+              <Pressable style={styles.optBtn}>
+                <Text style={styles.optText}>trivia</Text>
+              </Pressable>
+            </View>
+
+            <Pressable style={styles.cbtn}>
+              <Text style={styles.cbtnText}>CREATE GAME</Text>
+            </Pressable>
+          </View>
+        </Animated.View>
+      </Animated.View>
     </View>
   );
 }
@@ -105,6 +208,15 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
+  joinG: {
+    width: '100%',
+    marginRight: 20,
+  },
+  createG: {
+    width: '100%',
+    marginLeft: 10,
+  },
+
   chatListItem: {
     padding: 8,
     borderColor: '#9A6FDA',
@@ -121,5 +233,77 @@ const styles = StyleSheet.create({
       height: 2,
     },
     marginBottom: 16,
+  },
+  createModal: {
+    backgroundColor: '#33373C',
+    width: '100%',
+    height: 350,
+    position: 'absolute',
+    bottom: 0,
+    padding: 16,
+
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  hActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    minWidth: '20%',
+  },
+  mHead: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  mBody: {
+    flexDirection: 'row',
+  },
+  copyTxt: {
+    position: 'absolute',
+    top: 30,
+    right: 20,
+    zIndex: 900,
+  },
+  optBtn: {
+    height: 54,
+    borderRadius: 10,
+    backgroundColor: '#212529',
+    width: '45%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  options: {
+    flexDirection: 'row',
+    marginTop: 24,
+    justifyContent: 'space-between',
+  },
+  optText: {
+    color: '#fff',
+    fontFamily: 'Inter-Regular',
+  },
+  cbtnText: {
+    color: '#fff',
+    fontFamily: 'Inter-Regular',
+  },
+  cbtn: {
+    backgroundColor: '#9A6FDA',
+    padding: 16,
+    marginTop: 24,
+    height: 54,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  tInput: {
+    height: 65,
+    backgroundColor: '#212529',
+    width: '100%',
+    padding: 8,
+    borderRadius: 12,
+    fontFamily: 'Inter-SemiBold',
+    color: '#fff',
+    marginTop: 8,
+    borderColor: '#9A6FDA',
+    borderWidth: 1,
   },
 });
